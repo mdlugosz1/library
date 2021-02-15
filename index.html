@@ -19,7 +19,7 @@
             previously added books or remove them. All data is stored in local storage, so you have acces to it only
             when you visit this site using same device as before.</p>
 
-        <button>add book</button>
+        <button class='new-book'>add book</button>
 
         <table>
             <thead>
@@ -32,23 +32,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>King</td>
-                    <td>Dark Tower</td>
-                    <td>250</td>
-                    <td>No</td>
-                    <td>
-                        <button>Edit</button>
-                        <button>Remove</button>
-                    </td>
-                </tr>
+    
             </tbody>
             <tfoot>
                 <tr>
-                    <td>Book read</td>
+                    <!-- <td>Book read</td>
                     <td>1</td>
                     <td>Pages read</td>
-                    <td>1200</td>
+                    <td>1200</td> -->
                 </tr>
             </tfoot>
         </table>
@@ -64,7 +55,8 @@
             <input type="radio" id="yes" name="is-read" value="yes">
             <label for="male">yes</label>
             <input type="radio" id="no" name="is-read" value="no">
-            <label for="no">no</label>
+            <label for="no">no</label><br>
+            <button type="button" class="submit">Submit</button>
         </form>
 
     </main>

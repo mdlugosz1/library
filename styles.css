@@ -52,4 +52,11 @@ main table tr td {
 form {
     margin-top: 50px;
     background: yellow;
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
+
+.display-form {
+    display: block;
 }
