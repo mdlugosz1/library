@@ -1,0 +1,55 @@
+:root {
+    --background-color: #593C8F;
+    --main-color: #B2AA8E;
+    --second-color: #F5CCE8;
+}
+
+* {
+    box-sizing: border-box;
+    text-transform: uppercase;
+    /* color: #F5CCE8; */
+}
+
+body {
+    /* background-color: var(--background-color); */
+}
+
+header, main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+main p {
+    margin: 50px 0 25px 0;
+}
+
+main button {
+    margin-bottom: 50px;
+}
+
+main table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+main table thead {
+    /* background-color: var(--main-color); */
+    height: 40px;
+}
+
+main table tr th {
+    width: 20%;
+    border: 1px solid black;
+}
+
+main table tr td {
+    border: 1px solid black;
+}
+
+form {
+    margin-top: 50px;
+    background: yellow;
+}

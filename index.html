@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,68 @@
     <link rel="stylesheet" href="styles.css">
     <title>Library</title>
 </head>
+
 <body>
-    
+    <header>
+        <h1>Library</h1>
+    </header>
+
+    <main>
+        <p>This is the list for books you read or are reading. You can add new book by clicking the button below, edit
+            previously added books or remove them. All data is stored in local storage, so you have acces to it only
+            when you visit this site using same device as before.</p>
+
+        <button>add book</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Pages</th>
+                    <th>Finished</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>King</td>
+                    <td>Dark Tower</td>
+                    <td>250</td>
+                    <td>No</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Book read</td>
+                    <td>1</td>
+                    <td>Pages read</td>
+                    <td>1200</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <form>
+            <label for="author">Author</label><br>
+            <input type="text" id="author" name="author"><br>
+            <label for="title">Title</label><br>
+            <input type="text" name="title" id="title"><br>
+            <label for="pages">Pages</label><br>
+            <input type="number" name="pages" id="pages"><br>
+            <p>Read?</p>
+            <input type="radio" id="yes" name="is-read" value="yes">
+            <label for="male">yes</label>
+            <input type="radio" id="no" name="is-read" value="no">
+            <label for="no">no</label>
+        </form>
+
+    </main>
+
     <script src="scripts.js"></script>
 </body>
+
 </html>
