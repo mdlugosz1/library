@@ -14,31 +14,30 @@ function Book(author, title, pages, read, buttons) {
 }
 
 function addBookToLibrary() {
-    let formAuthor = document.querySelector('#author').value;
-    let formTitle = document.querySelector('#title').value;
-    let formPages = document.querySelector('#pages').value;
+    const formAuthor = document.querySelector('#author').value;
+    const formTitle = document.querySelector('#title').value;
+    const formPages = document.querySelector('#pages').value;
 
     const addedBook = new Book(formAuthor, formTitle, formPages);
 
     myLibrary.push(addedBook);
-    createTableRow();
-    formAuthor.value = '';
+
+    tableBody.innerHTML = '';
 }
 
-function displayBooks(library) {
-
+function displayBooks(library) {   
+    library.forEach(book => {
+        const newRow = document.createElement('tr');
+        tableBody.appendChild(newRow);
+        
+        for (let key in book) {
+            const newCell = document.createElement('td');
+            newRow.appendChild(newCell);
+            newCell.textContent = book[key];
+        }
+    });
 }
 
-function createTableRow() {
-    const newRow = document.createElement('tr');
-    tableBody.appendChild(newRow);
-    for (j = 0; j < 5; j++) {
-        const newCell = document.createElement('td');
-        newRow.appendChild(newCell);
-    }
-}
-
-displayBooks(myLibrary);
 
 addButton.addEventListener('click', () => {
     form.classList.add('display-form');
