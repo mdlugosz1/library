@@ -17,12 +17,27 @@ function addBookToLibrary() {
     const formAuthor = document.querySelector('#author').value;
     const formTitle = document.querySelector('#title').value;
     const formPages = document.querySelector('#pages').value;
+    const formIsRead = radioButtonsCheck(form, 'is-read');
 
-    const addedBook = new Book(formAuthor, formTitle, formPages);
-
+    const addedBook = new Book(formAuthor, formTitle, formPages, formIsRead);
+    
     myLibrary.push(addedBook);
 
     tableBody.innerHTML = '';
+}
+
+//Function checks if button is checked and then returns it's value
+function radioButtonsCheck(form, name) {
+    const radioButtons = form.elements[name];
+    let radioValue;
+
+    for (let i = 0; i < name.length; i++) {
+        if (radioButtons[i].checked) {
+            radioValue = radioButtons[i].value;
+            break;
+        }
+    }
+    return radioValue;
 }
 
 function displayBooks(library) {   
