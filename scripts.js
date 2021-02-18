@@ -3,7 +3,7 @@ const addButton = document.querySelector('.new-book');
 const tableBody = document.querySelector('tbody');
 const submit = document.querySelector('.submit');
 
-let myLibrary = [];
+let myLibrary = [new Book('Cormac McCarthy', 'The Road', 287, true), new Book('Cormac McCarthy', 'No Country for Old men', 287, false)];
 
 function Book(author, title, pages, read) {
     this.author = author
@@ -13,14 +13,30 @@ function Book(author, title, pages, read) {
 }
 
 function addBookToLibrary() {
-    const formAuthor = document.querySelector('#author').value;
-    const formTitle = document.querySelector('#title').value;
-    const formPages = document.querySelector('#pages').value;
+    const formAuthor = document.querySelector('#author');
+    const formTitle = document.querySelector('#title');
+    const formPages = document.querySelector('#pages');
     const formIsRead = radioButtonsCheck(form, 'is-read');
 
-    const addedBook = new Book(formAuthor, formTitle, formPages, formIsRead);
-    
-    myLibrary.push(addedBook);
+    if ((formAuthor.value === '') || (formTitle.value === '') || (formPages.value === '')) {
+        alert('Fill all info');
+        return;
+    } else {
+        const addedBook = new Book(formAuthor.value, formTitle.value, formPages.value, formIsRead);
+        myLibrary.push(addedBook);
+        form.classList.remove('display-form');
+    }
+
+    clearForm(formAuthor, formTitle, formPages);
+}
+
+function clearForm(authorValue, titleValue, pagesValue) {
+    authorValue.textContent = '';
+    authorValue.value = '';
+    titleValue.textContent = '';
+    titleValue.value = '';
+    pagesValue.textContent = '';
+    pagesValue.value = '';
 }
 
 //Function checks if button is checked and then returns it's value
@@ -31,9 +47,16 @@ function radioButtonsCheck(form, name) {
     for (let i = 0; i < name.length; i++) {
         if (radioButtons[i].checked) {
             radioValue = radioButtons[i].value;
-            break;
+            radioButtons[i].checked = false;
+
+            if (radioValue === 'yes') {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
+
     return radioValue;
 }
 
@@ -49,18 +72,38 @@ function displayBooks(library) {
             const newCell = document.createElement('td');
             newRow.appendChild(newCell);
             newCell.textContent = book[key];
+            newCell.setAttribute('class', key);
+            newCell.setAttribute('data', library.indexOf(book));
+
+            if (newCell.classList.contains('read')) {
+                if (book[key] === true) {
+                    newCell.style.color = 'green';
+                    newCell.textContent = 'yes';
+                } else {
+                    newCell.style.color = 'red';
+                    newCell.textContent = 'no';
+                }
+            }
+            
         }
-
-        const removeButton = document.createElement('button');
-        const cellForButtons = document.createElement('td');
-        removeButton.textContent = 'remove';
-        removeButton.value = library.indexOf(book);
         
-        cellForButtons.appendChild(removeButton);
-        newRow.appendChild(cellForButtons);
-
-        removeButton.addEventListener('click', removeBook);
+        addEditButtons();
     });
+    
+    changeReadStatus();
+}
+
+function changeReadStatus() {
+    const isReadCells = tableBody.querySelectorAll('.read');
+    
+    isReadCells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            if (cell.getAttribute('data') === cell.parentElement.getAttribute('data')) {
+                myLibrary[cell.getAttribute('data')].read = !myLibrary[cell.getAttribute('data')].read;
+                displayBooks(myLibrary);
+            }
+        })
+    }) 
 }
 
 function removeBook(e) {
@@ -77,8 +120,19 @@ function removeBook(e) {
     displayBooks(myLibrary);
 }
 
-function editBook(e) {
+function addEditButtons() {
+    const selectRow = tableBody.querySelectorAll('tr');
+    const removeButton = document.createElement('button');
+    const cellForButtons = document.createElement('td');
     
+    cellForButtons.appendChild(removeButton);
+    removeButton.textContent = 'remove';
+    
+    for (let i = 0; i < selectRow.length; i++) {
+        removeButton.value = selectRow[i].getAttribute('data');
+        selectRow[i].appendChild(cellForButtons);
+        removeButton.addEventListener('click', removeBook)
+    }
 }
 
 addButton.addEventListener('click', () => {
@@ -88,5 +142,6 @@ addButton.addEventListener('click', () => {
 submit.addEventListener('click', () => {
     addBookToLibrary();
     displayBooks(myLibrary);
-    form.classList.remove('display-form');
 });
+
+displayBooks(myLibrary);
