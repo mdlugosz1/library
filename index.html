@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Library</title>
 </head>
@@ -15,8 +17,9 @@
     </header>
 
     <main>
-        <p>This is the list for books you read or are reading. You can add new book by clicking the button below, edit
-            previously added books or remove them. All data is stored in local storage, so you have acces to it only
+        <p>This is your library, where you can add books that you're reading now or books that you finished. If you want
+            to add a new book to library, just click button below. You can change book read status by simply clicking
+            yes/no in "Finished" column. All data is stored in local storage, so you have acces to it only
             when you visit this site using same device as before.</p>
 
         <button class='new-book'>add book</button>
@@ -28,39 +31,45 @@
                     <th>Title</th>
                     <th>Pages</th>
                     <th>Finished</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-    
+
             </tbody>
             <tfoot>
                 <tr>
-                    <!-- <td>Book read</td>
-                    <td>1</td>
-                    <td>Pages read</td>
-                    <td>1200</td> -->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tfoot>
         </table>
+    </main>
 
+    <div class="form-background">
         <form>
+            <span class="close">X</span>
+            <div class="user-inputs">
             <label for="author">Author</label><br>
             <input type="text" id="author" name="author"><br>
             <label for="title">Title</label><br>
             <input type="text" name="title" id="title"><br>
             <label for="pages">Pages</label><br>
             <input type="number" name="pages" id="pages"><br>
+        </div>
             <p>Read?</p>
-            <input type="radio" id="yes" name="is-read" value="yes">
-            <label for="yes">yes</label>
-            <input type="radio" id="no" name="is-read" value="no">
-            <label for="no">no</label><br>
+            <div class="radio-btn">
+                <input type="radio" id="yes" name="is-read" value="yes">
+                <label for="yes">yes</label>
+                <input type="radio" id="no" name="is-read" value="no">
+                <label for="no">no</label><br>
+            </div>
             <button type="button" class="submit">Submit</button>
         </form>
-
-    </main>
-
+    </div>
     <script src="scripts.js"></script>
 </body>
 

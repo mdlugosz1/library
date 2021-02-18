@@ -1,9 +1,11 @@
+const formContainer = document.querySelector('.form-background');
 const form = document.querySelector('form');
 const addButton = document.querySelector('.new-book');
 const tableBody = document.querySelector('tbody');
 const submit = document.querySelector('.submit');
+const closeButton = document.querySelector('.close');
 
-let myLibrary = [new Book('Cormac McCarthy', 'The Road', 287, true), new Book('Cormac McCarthy', 'No Country for Old men', 287, false)];
+let myLibrary = [new Book('Cormac McCarthy', 'The Road', 287, true), new Book('Stephen King', 'Dark Tower', 554, false)];
 
 function Book(author, title, pages, read) {
     this.author = author
@@ -24,7 +26,7 @@ function addBookToLibrary() {
     } else {
         const addedBook = new Book(formAuthor.value, formTitle.value, formPages.value, formIsRead);
         myLibrary.push(addedBook);
-        form.classList.remove('display-form');
+        formContainer.classList.remove('form-background-visible');
     }
 
     clearForm(formAuthor, formTitle, formPages);
@@ -60,14 +62,14 @@ function radioButtonsCheck(form, name) {
     return radioValue;
 }
 
-function displayBooks(library) {   
+function displayBooks(library) {
     tableBody.innerHTML = '';
 
     library.forEach(book => {
         const newRow = document.createElement('tr');
         tableBody.appendChild(newRow);
         newRow.setAttribute('data', library.indexOf(book));
-        
+
         for (let key in book) {
             const newCell = document.createElement('td');
             newRow.appendChild(newCell);
@@ -84,26 +86,28 @@ function displayBooks(library) {
                     newCell.textContent = 'no';
                 }
             }
-            
         }
-        
-        addEditButtons();
+
+        addRemoveButton();
     });
-    
+
     changeReadStatus();
 }
 
 function changeReadStatus() {
     const isReadCells = tableBody.querySelectorAll('.read');
-    
+
     isReadCells.forEach(cell => {
         cell.addEventListener('click', () => {
-            if (cell.getAttribute('data') === cell.parentElement.getAttribute('data')) {
-                myLibrary[cell.getAttribute('data')].read = !myLibrary[cell.getAttribute('data')].read;
+            const cellAtt = cell.getAttribute('data');
+            const parAtt = cell.parentElement.getAttribute('data');
+
+            if (cellAtt === parAtt) {
+                myLibrary[cellAtt].read = !myLibrary[cellAtt].read;
                 displayBooks(myLibrary);
             }
         })
-    }) 
+    })
 }
 
 function removeBook(e) {
@@ -120,24 +124,30 @@ function removeBook(e) {
     displayBooks(myLibrary);
 }
 
-function addEditButtons() {
+function addRemoveButton() {
     const selectRow = tableBody.querySelectorAll('tr');
     const removeButton = document.createElement('button');
     const cellForButtons = document.createElement('td');
-    
+
     cellForButtons.appendChild(removeButton);
     removeButton.textContent = 'remove';
-    
+
     for (let i = 0; i < selectRow.length; i++) {
         removeButton.value = selectRow[i].getAttribute('data');
         selectRow[i].appendChild(cellForButtons);
-        removeButton.addEventListener('click', removeBook)
+        removeButton.addEventListener('click', removeBook);
     }
 }
 
+function closeForm() {
+    formContainer.classList.remove('form-background-visible');
+}
+
 addButton.addEventListener('click', () => {
-    form.classList.add('display-form');
-})
+    formContainer.classList.add('form-background-visible');
+});
+
+closeButton.addEventListener('click', closeForm);
 
 submit.addEventListener('click', () => {
     addBookToLibrary();

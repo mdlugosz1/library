@@ -1,17 +1,42 @@
 :root {
-    --background-color: #593C8F;
-    --main-color: #B2AA8E;
-    --second-color: #F5CCE8;
+    --main-color: #577590;
+    --background-color: #43AA8B;
+    --second-color: #90BE6D;
+    --third-color: #F9C74F;
+    --fourth-color: #F8961E;
+    --fifth-color: #F3722C;
+    --sixth-color: #F94144;
 }
 
 * {
     box-sizing: border-box;
-    text-transform: uppercase;
-    /* color: #F5CCE8; */
+    color: black;
 }
 
 body {
-    /* background-color: var(--background-color); */
+    background-color:var(--background-color);
+    font-family: 'Amatic SC', cursive;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+}
+
+button {
+    font-family: 'Amatic SC', cursive;
+    font-size: 26px;
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+    padding: 3px 20px;
+    background-color: var(--fifth-color);
+    font-weight: 700;
+    z-index: 20;
+    box-shadow: 2px 2px 2px 2px var(--main-color);
+}
+
+button:hover {
+    transform: rotate(20deg);
 }
 
 header, main {
@@ -27,41 +52,124 @@ main {
 
 main p {
     margin: 50px 0 25px 0;
+    font-size: 32px;
+    font-weight: 600;
 }
 
-main button {
+.new-book {
     margin-bottom: 50px;
+    padding: 10px 20px;
 }
 
 main table {
     width: 100%;
-    border: 1px solid black;
-    border-collapse: collapse;
+    border-spacing: 0em;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 1px 1px 20px 0 var(--main-color);
 }
 
-main table thead {
-    /* background-color: var(--main-color); */
+main table button {
+    background-color: var(--sixth-color);
+    margin: 18px 0;
+}
+
+main table thead tr th:nth-child(1) {
+    width: 25%;
+}
+
+main table thead tr th:nth-child(2) {
+    width: 35%;
+}
+
+main table thead tr th:nth-child(3) {
+    width: 15%;
+}
+
+main table thead tr th:nth-child(4) {
+    width: 2.5%;
+}
+
+main table thead, tfoot {
+    background-color: var(--fourth-color);
     height: 40px;
+    font-weight: 900;
 }
 
-main table tr th {
-    width: 20%;
+main table tbody tr:nth-child(odd) {
+    background-color: var(--second-color);
+}
+
+main table tbody tr:nth-child(even) {
+    background-color: var(--third-color);
+}
+
+main table tbody tr td:nth-child(4) {
+    font-weight: 900;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     border: 1px solid black;
 }
 
-main table tr td {
-    border: 1px solid black;
+.close:hover {
+    transform: rotate(150deg);
+    transition: transform .25s;
 }
 
 form {
-    margin-top: 50px;
-    background: yellow;
+    margin: auto;
+    width: 15em;
+    height: 17em;
     position: absolute;
-    display: none;
+    background: var(--third-color);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    font-weight: 900;
 }
 
-.display-form {
-    display: block;
+form p {
+    margin-top: -25px;
+}
+
+.form-background {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding: 0;
+    top: 0;
+    visibility: hidden;
     z-index: 100;
+    transform: scale(0.1);
+}
+
+.user-inputs {
+    margin: 50px auto;
+}
+
+.radio-btn {
+    margin-top: -25px;
+    margin-bottom: 25px;
+}
+
+.read {
+    cursor: pointer;
+}
+
+.form-background-visible {
+    visibility: visible;
+    transform: scale(1);
+    transition: transform .6s;
 }
