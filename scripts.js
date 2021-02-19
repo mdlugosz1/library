@@ -5,7 +5,7 @@ const tableBody = document.querySelector('tbody');
 const submit = document.querySelector('.submit');
 const closeButton = document.querySelector('.close');
 
-let myLibrary = [];
+let myLibrary = [[new Book('Cormac McCarthy', 'The Road', 287, true), new Book('Stephen King', 'Dark Tower', 554, false)]];
 
 function Book(author, title, pages, read) {
     this.author = author
@@ -157,15 +157,15 @@ submit.addEventListener('click', () => {
 //Code for local storage
 
 function storeLibrary() {
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    localStorage.setItem('userLibrary', JSON.stringify(myLibrary));
 }
 
 function getLibrary() {
-    const library = localStorage.getItem('myLibrary');
-    myLibrary = JSON.parse(library);
+    const library = localStorage.getItem('userLibrary');
+    myLibrary = JSON.parse(userLibrary);
 }
 
 window.onload = () => {
-    myLibrary !== null ? getLibrary() : myLibrary = [new Book('Cormac McCarthy', 'The Road', 287, true), new Book('Stephen King', 'Dark Tower', 554, false)];
+    userLibrary !== null ? getLibrary() : myLibrary;
     displayBooks(myLibrary);
 }
