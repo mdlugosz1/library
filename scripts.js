@@ -5,7 +5,7 @@ const tableBody = document.querySelector('tbody');
 const submit = document.querySelector('.submit');
 const closeButton = document.querySelector('.close');
 
-let myLibrary = [[new Book('Cormac McCarthy', 'The Road', 287, true), new Book('Stephen King', 'Dark Tower', 554, false)]];
+let myLibrary = [];
 
 function Book(author, title, pages, read) {
     this.author = author
@@ -165,7 +165,8 @@ window.onload = () => {
     if (userLibrary !== null) {
         myLibrary = userLibrary;
     } else {
-        myLibrary;
+        myLibrary.push(new Book('Cormac McCarthy', 'The Road', 287, true));
+        myLibrary.push(new Book('Stephen King', 'Dark Tower', 559, false));
     }
 
     displayBooks(myLibrary);
