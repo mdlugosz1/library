@@ -74,7 +74,7 @@ function clearForm(authorValue, titleValue, pagesValue) {
     pagesValue.value = '';
 }
 
-//Function checks if button is checked and then converts it' value to true/false
+//Function checks if button is checked and then converts it's value to true/false
 function radioButtonsCheck(form, name) {
     const radioButtons = form.elements[name];
     let radioValue;
@@ -157,15 +157,16 @@ submit.addEventListener('click', () => {
 //Code for local storage
 
 function storeLibrary() {
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-}
-
-function getLibrary() {
-    const library = localStorage.getItem('myLibrary');
-    myLibrary = JSON.parse(library);
+    localStorage.setItem('userLibrary', JSON.stringify(myLibrary));
 }
 
 window.onload = () => {
-    myLibrary !== null ? getLibrary() : myLibrary = [];
+    const userLibrary = JSON.parse(localStorage.getItem('userLibrary'));
+    if (userLibrary !== null) {
+        myLibrary = userLibrary;
+    } else {
+        myLibrary;
+    }
+
     displayBooks(myLibrary);
 }
