@@ -21,7 +21,7 @@ function addBookToLibrary() {
     const formIsRead = radioButtonsCheck(form, 'is-read');
 
     if ((formAuthor.value === '') || (formTitle.value === '') || (formPages.value === '')) {
-        alert('Fill all info');
+        alert('Every form field must be filled!');
         return;
     } else {
         const addedBook = new Book(formAuthor.value, formTitle.value, formPages.value, formIsRead);
@@ -30,36 +30,6 @@ function addBookToLibrary() {
     }
 
     clearForm(formAuthor, formTitle, formPages);
-}
-
-function clearForm(authorValue, titleValue, pagesValue) {
-    authorValue.textContent = '';
-    authorValue.value = '';
-    titleValue.textContent = '';
-    titleValue.value = '';
-    pagesValue.textContent = '';
-    pagesValue.value = '';
-}
-
-//Function checks if button is checked and then returns it's value
-function radioButtonsCheck(form, name) {
-    const radioButtons = form.elements[name];
-    let radioValue;
-
-    for (let i = 0; i < name.length; i++) {
-        if (radioButtons[i].checked) {
-            radioValue = radioButtons[i].value;
-            radioButtons[i].checked = false;
-
-            if (radioValue === 'yes') {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    return radioValue;
 }
 
 function displayBooks(library) {
@@ -92,6 +62,36 @@ function displayBooks(library) {
     });
 
     changeReadStatus();
+    storeLibrary();
+}
+
+function clearForm(authorValue, titleValue, pagesValue) {
+    authorValue.textContent = '';
+    authorValue.value = '';
+    titleValue.textContent = '';
+    titleValue.value = '';
+    pagesValue.textContent = '';
+    pagesValue.value = '';
+}
+
+//Function checks if button is checked and then converts it' value to true/false
+function radioButtonsCheck(form, name) {
+    const radioButtons = form.elements[name];
+    let radioValue;
+
+    for (let i = 0; i < name.length; i++) {
+        if (radioButtons[i].checked) {
+            radioValue = radioButtons[i].value;
+
+            if (radioValue === 'yes') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return radioValue;
 }
 
 function changeReadStatus() {
@@ -154,4 +154,18 @@ submit.addEventListener('click', () => {
     displayBooks(myLibrary);
 });
 
-displayBooks(myLibrary);
+//Code for local storage
+
+function storeLibrary() {
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function getLibrary() {
+    const library = localStorage.getItem('myLibrary');
+    myLibrary = JSON.parse(library);
+}
+
+window.onload = () => {
+    myLibrary !== null ? getLibrary() : myLibrary = [];
+    displayBooks(myLibrary);
+}

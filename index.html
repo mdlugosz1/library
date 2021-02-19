@@ -39,11 +39,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colspan="5">&copy; Made by Michał Długosz</td>
                 </tr>
             </tfoot>
         </table>
@@ -58,11 +54,11 @@
             <label for="title">Title</label><br>
             <input type="text" name="title" id="title"><br>
             <label for="pages">Pages</label><br>
-            <input type="number" name="pages" id="pages"><br>
+            <input type="number" name="pages" id="pages" min="0"><br>
         </div>
             <p>Read?</p>
             <div class="radio-btn">
-                <input type="radio" id="yes" name="is-read" value="yes">
+                <input type="radio" id="yes" name="is-read" value="yes" checked>
                 <label for="yes">yes</label>
                 <input type="radio" id="no" name="is-read" value="no">
                 <label for="no">no</label><br>
